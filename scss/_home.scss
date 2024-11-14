@@ -1,0 +1,325 @@
+
+.visual-container {
+    min-height:rem(700); 
+    background:url($url + 'bg.jpg') no-repeat center top/cover; 
+    position:relative;
+    &:before {
+        content:'';
+        display:block;
+        background-color:rgba(black,0.5);
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+        position:absolute;
+        left:0;top:0;right:0;bottom:0;
+    }
+    & > * {
+        position:relative;
+    } 
+}
+
+.page-header {
+    @extend %base;
+    @include flex(10px);
+
+    h1 {
+        color:$primary;
+        @include shadow(text);
+        flex-grow:1; 
+        @include remFont(32, 700);
+    }
+
+    select, a {
+        font-size:13px; 
+    }
+    select { 
+        @include formBox(line);
+    }
+
+    a { 
+        @include formBox(btn);
+        font-weight:700;
+        white-space:nowrap;
+    }
+}
+
+.email-container{    
+    min-height:500px;
+    @include flex($j:center,$d:column);
+    text-align:center;
+    padding:rem(24) rem(48);
+
+    header { 
+        h2 { 
+            @extend %text-lg;
+        }
+    
+        p {
+            @include remFont(sm); 
+            margin:1rem 0;
+        }
+    }
+
+   
+    h3 {
+        @extend %text-sm;
+    }  
+
+    .field-box{
+        @include flex(20px, $j:center); 
+        margin-top:rem(32);
+        input { 
+            max-width:400px;
+            width:100%; 
+            @include formBox(input, lg);
+        }
+    }
+
+    .btn-submit { 
+        @include formBox(btn, lg); 
+        @extend %text-md;
+    }
+
+    
+}
+ 
+
+.banner-container {
+    @include flex(30px,$j:center); 
+    margin:0 rem(64);
+    padding:1rem 0; 
+    background-image:radial-gradient(
+        51.39% 511.66% at 47.68% -217.91%,
+        #ff9900 0%,
+        #e50914 17.27%,
+        #0e1b4f 79.44%,
+        #000413 100%
+    );
+    
+    @include shadow($size:30px);
+    transform:translateY(-50%);
+
+    h3 { 
+        @extend %text-sm;
+    }
+
+    img {
+        width:100px;
+    }
+
+    .contents {
+        line-height:1.5;
+    }
+
+  
+}
+
+
+
+.link-more { 
+    color:$sub;
+    font-weight:500;
+    text-decoration:underline;
+    @include flex(5px, $j:flex-start);
+    padding-right:30px;
+
+    &:after {
+        content:'';
+        display:block;
+        width:14px;height:14px;
+        background:url($url + 'arrow_right.svg') no-repeat right center/contain;
+    }
+} 
+
+
+.page-main { 
+    
+    h2 { 
+        @extend %text-lg; 
+        text-align:center;
+    }
+
+    .service-list {
+        li {
+            border-bottom:7px solid rgba(white,0.1);
+            &:hover {
+               img {
+                transform:rotate(-8deg);
+               }  
+            }
+            .inner {
+                @extend %base;
+                @include flex(2rem);
+                padding:rem(80) rem(48);  
+                & > * {
+                    flex-basis:50%;
+                }
+            }
+            &:nth-child(even) {
+                .inner {
+                    flex-direction:row-reverse;
+                }
+            } 
+            
+
+            h3 { 
+                @extend %text-lg;
+            }
+
+            p { 
+                @extend %text-sm;
+            }
+
+            img {
+                max-width:500px;
+                @include shadow(box);
+                transition:0.5s;
+                
+            }
+        }
+    }
+}
+
+.faq-container {
+    @extend %base;
+    $bg : rgba(white, 0.1);
+    $hover : rgba(white, 0.2);
+
+    li {
+        margin-bottom:5px;
+    }
+    h2 {
+        @include remFont(lg, 500); 
+        text-align:center;
+        margin-bottom:30px;
+    }
+
+    details { 
+        @extend %text-md;
+        transition:0.4s;
+        &:hover {
+            background-color:$hover;
+        }
+    }
+
+    summary { 
+        font-weight:500;
+        padding:rem(24);
+        background-color:$bg;
+        
+        margin-bottom:2px;
+        position:relative;
+
+        $svgUrl : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z' fill='%23FFF' /%3E%3C/svg%3E";
+        
+       
+
+        &:after {
+            content:'';
+            position:absolute;
+            display:block;
+            width:20px;height:20px;   
+            transform-origin:center center;
+            right:20px;
+            top:calc(50% - 10px);
+            background:url($svgUrl) no-repeat center center/contain;
+            transition:0.5s;
+        } 
+     
+    } 
+
+    .answer {
+        background-color:$bg;
+        padding:rem(24);
+        font-weight:300;
+    }
+
+    details[open] {
+        summary{
+            &:after {
+                transform:rotate(45deg);
+            }
+        }
+    }
+}
+
+.page-footer {
+    border-top:7px solid rgba(white,0.1);
+    padding:rem(24) 0;
+    text-align:center;
+
+    a.codingghost { color : gold}
+    a { color:dodgerblue }
+
+    a:hover {
+        text-decoration:underline;
+    }
+}
+
+
+.btn-top {
+    position:fixed;
+    right:50px;bottom:50px;
+    width:80px;height:80px;
+    border-radius:50%;
+    @include shadow;
+    background:#8158ab url($url + 'hand.png') no-repeat center bottom -20px /contain;
+    display:none;
+
+    &:hover {
+        background-position:center bottom 0;
+    }
+}
+
+.scroll-ghost {
+    position:fixed;
+    top:var(--scroll);
+    left:50px;
+    width:80px; 
+    padding-top:100px;
+}
+// ---------------- Responsible
+
+@include media($tablet) {
+    .page-main {
+        .service-list {
+            li {
+                text-align:center;
+                .inner {
+                    flex-direction:column;
+                    img {
+                        max-width:none;
+                        width:80vw;
+                    }
+                }
+
+                &:nth-child(even) {
+                    .inner {
+                        flex-direction:column;
+                    }
+                }
+            }
+        }
+    }
+
+    .module-email {
+        .field-box {
+            flex-direction: column;
+
+            input {
+                max-width:none;
+            }
+            button {
+                width:50vw;
+            }
+        }
+    }
+}
+
+@include media($break) {
+    .scroll-ghost {
+        display:none;
+    }
+ 
+}
+
+
+ 
